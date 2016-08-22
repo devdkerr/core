@@ -4,11 +4,12 @@ MAINTAINER Daniel R. Kerr <daniel.r.kerr@gmail.com>
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update -y \
- && apt-get install -qq -y imagemagick libace-6.0.3 libev-dev libprotobuf8 libreadline-dev libssl-dev libtk-img libxml-libxml-perl libxml-simple-perl \
+ && apt-get install -qq -y libace-6.0.3 libev-dev libprotobuf8 libreadline-dev libssl-dev libtk-img libxml-libxml-perl libxml-simple-perl \
  && apt-get install -qq -y autoconf automake gcc help2man make pkg-config \
  && apt-get install -qq -y python python-dev python-lxml python-protobuf python-setuptools tcl8.5 tk8.5 \
- && apt-get install -qq -y bash curl git openssh-server supervisor wget \
- && apt-get install -qq -y bridge-utils ebtables iproute isc-dhcp-server tcpdump uml-utilities quagga \
+ && apt-get install -qq -y bash curl git imagemagick supervisor wget \
+ && apt-get install -qq -y apache2 isc-dhcp-server openssh-server vsftpd \
+ && apt-get install -qq -y bridge-utils ebtables iproute tcpdump uml-utilities quagga \
  && apt-get clean \
  && rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
 
