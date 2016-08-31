@@ -35,6 +35,7 @@ RUN mkdir /var/run/sshd \
  && chmod 600 /root/.ssh/authorized_keys
 EXPOSE 22
 
+COPY icons /usr/local/share/core/icons/cisco
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 WORKDIR /root
