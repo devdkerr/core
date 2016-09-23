@@ -5,7 +5,6 @@ ENV DEBIAN_FRONTEND noninteractive
 ENV TERM xterm
 
 RUN apt-get update -y \
- && apt-get install -qq -y linux-headers-$(uname -r) linux-image-$(uname -r) \
  && apt-get install -qq -y libace-dev libev-dev libprotobuf-dev libreadline-dev libssl-dev libtk-img libxml-libxml-perl libxml-simple-perl \
  && apt-get install -qq -y autoconf automake gcc help2man make pkg-config tcc \
  && apt-get install -qq -y python python-dev python-lxml python-protobuf python-setuptools \

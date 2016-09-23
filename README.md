@@ -5,22 +5,23 @@ To start the container with a specific key and custom network, run the following
 
 ```bash
 docker run \
-    -d \
+    --detach \
     --name <name> \
-    -p 22 \
+    --publish 22 \
     --privileged \
-    -v <public key>:/root/.ssh/authorized_keys:ro \
-    -v <imunes network>:/root/network.imn:rw \
-    devdkerr/core
+    --volume /lib/modules:/lib/modules \
+    devdkerr/core:xenial
+
+docker cp <public key> <name>:/root/.ssh/authorized_keys
 ```
 
 To launch the container's core user interface locally using X forwarding, run the following:
 
 ```bash
 ssh \
-    -i rsa \
+    -i <private key> \
     -p $(docker inspect --format='{{ (index (index .NetworkSettings.Ports "22/tcp") 0).HostPort }}' <name>) \
-    -X root@localhost \
+    -X root@<docker host> \
     core-gui
 ```
 
