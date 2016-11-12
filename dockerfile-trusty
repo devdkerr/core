@@ -15,7 +15,7 @@ RUN apt-get update -y \
 RUN apt-get update -y \
  && apt-get install -qq -y bash curl git imagemagick supervisor wget xvfb \
  && apt-get install -qq -y apache2 openssh-server vsftpd \
- && apt-get install -qq -y bridge-utils ebtables iproute iputils-ping isc-dhcp-server net-tools tcpdump quagga uml-utilities \
+ && apt-get install -qq -y bridge-utils ebtables iproute iputils-ping isc-dhcp-server mgen net-tools tcpdump quagga uml-utilities \
  && apt-get clean \
  && rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
 
