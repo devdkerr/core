@@ -1,5 +1,4 @@
-Dockerized CORE & EMANE
-========================================
+# Dockerized CORE & EMANE
 
 To start the container with a specific key and custom network, run the following:
 
@@ -31,7 +30,6 @@ To stop and remove the container, run the following:
 docker rm -f <name>
 ```
 
-Citations
-----------------------------------------
+## Citations
 
 * Comparison of CORE Network Emulation Platforms, Proceedings of IEEE MILCOM Conference, 2010, pp.864-869.

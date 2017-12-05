@@ -7,7 +7,8 @@ ENV TERM xterm
 RUN apt-get update -y \
  && apt-get install -qq -y libace-dev libev-dev libffi-dev libprotobuf-dev libreadline-dev libssl-dev libtk-img libyaml-dev libxml-libxml-perl libxml-simple-perl \
  && apt-get install -qq -y autoconf automake gcc help2man make pkg-config tcc \
- && apt-get install -qq -y python python-dev python-lxml python-pip python-protobuf python-setuptools \
+ && apt-get install -qq -y python python-dev python-pip \
+ && apt-get install -qq -y python-lxml python-protobuf python-setuptools python-sphinx \
  && apt-get install -qq -y tcl8.5 tk8.5 \
  && apt-get clean \
  && rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
