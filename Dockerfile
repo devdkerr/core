@@ -40,7 +40,9 @@ RUN mkdir /var/run/sshd \
  && chown root:root /root/.ssh \
  && touch /root/.ssh/authorized_keys \
  && chmod 600 /root/.ssh/authorized_keys \
- && chown root:root /root/.ssh/authorized_keys
+ && chown root:root /root/.ssh/authorized_keys \
+ && echo "\nX11UseLocalhost no\n" >> /etc/ssh/sshd_config
+
 EXPOSE 22
 
 COPY icons /usr/local/share/core/icons/cisco
