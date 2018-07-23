@@ -41,7 +41,13 @@ RUN apt-get update -y \
 
 # install emanes
 #---------------------------------------
-# TODO
+#RUN wget -O /opt/emane.tgz https://adjacentlink.com/downloads/emane/emane-1.0.1-release-1.ubuntu-16_04.amd64.tar.gz \
+# && cd /opt \
+# && tar xzf /opt/emane.tgz \
+# && cd /opt/emane-1.0.1-release-1/debs/ubuntu-16_04/amd64 \
+# && dpkg -i emane*.deb python*.deb \
+# && cd /root \
+# && rm -rf /opt/emane.tgz /opt/emane-1.0.1-release-1
 
 # install and configure ssh
 #---------------------------------------
