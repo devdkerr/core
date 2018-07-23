@@ -158,7 +158,6 @@ if __name__ == '__main__':
     build_parser.set_defaults(func=cli_build_func)
 
     up_parser = subparser.add_parser('up')
-    up_parser.add_argument('--dev', action='store_true')
     up_parser.add_argument('--image', default='devdkerr/core')
     up_parser.add_argument('--tag', default='latest')
     up_parser.add_argument('--public-key', default='~/.ssh/id_rsa.pub')
