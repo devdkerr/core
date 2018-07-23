@@ -9,9 +9,11 @@ docker run \
     --publish 22 \
     --privileged \
     --volume /lib/modules:/lib/modules \
-    devdkerr/core:xenial
+    devdkerr/core
 
 docker cp <public key> <name>:/root/.ssh/authorized_keys
+docker exec <name> chmod 600 /root/.ssh/authorized_keys
+docker exec <name> chown root:root /root/.ssh/authorized_keys
 ```
 
 To launch the container's core user interface locally using X forwarding, run the following:
