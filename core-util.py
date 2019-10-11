@@ -55,7 +55,7 @@ def run_command(label, private_key, host, command):
     cmd += ' -t'
     cmd += ' -o StrictHostKeyChecking=no'
     cmd += ' -o UserKnownHostsFile=/dev/null'
-    #cmd += ' -o XAuthLocation=/opt/X11/bin/xauth'
+    cmd += ' -o XAuthLocation=/opt/X11/bin/xauth'
     cmd += ' -p {0}'.format(ssh_port)
     cmd += ' -X'
     cmd += ' root@{0}'.format(host)
@@ -73,7 +73,7 @@ def cli_build_func(args):
         pull=args.pull,
         nocache=args.nocache,
         rm=True,
-        forcerm=True
+        forcerm=True,
     )
 
 def cli_up_func(args):
@@ -84,7 +84,7 @@ def cli_up_func(args):
     volumes = {
         '/lib/modules': {
             'bind': '/lib/modules',
-            'mode': 'rw'
+            'mode': 'rw',
         }
     }
 
@@ -95,11 +95,11 @@ def cli_up_func(args):
         image='{0}:{1}'.format(args.image, args.tag),
         detach=True,
         labels=[
-            args.label
+            args.label,
         ],
         privileged=True,
         publish_all_ports=True,
-        volumes=volumes
+        volumes=volumes,
     )
 
     if os.path.exists(key_path) and os.path.isfile(key_path):
