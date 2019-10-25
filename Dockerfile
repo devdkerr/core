@@ -1,5 +1,5 @@
 FROM ubuntu:bionic
-LABEL maintainer="Daniel R. Kerr <daniel.r.kerr@gmail.com>"
+LABEL maintainer "Daniel R. Kerr <daniel.r.kerr@gmail.com>"
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV TERM xterm
@@ -7,21 +7,18 @@ ENV TERM xterm
 # install core dependencies
 #---------------------------------------
 RUN apt-get update -y \
- && apt-get install -qq -y libev4 libtk-img \
- && apt-get install -qq -y python python-enum34 python-lxml \
- && apt-get install -qq -y bridge-utils ebtables iproute2 quagga \
- && apt-get install -qq -y tcl tk \
+ && apt-get install -qq -y libev-dev libtk-img \
+ && apt-get install -qq -y python3 python3-dev python3-pip python3-setuptools \
+ && apt-get install -qq -y automake gcc git pkg-config tk \
+ && apt-get install -qq -y bridge-utils ebtables ethtool iproute2 \
  && apt-get clean \
  && rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
 
 # install core
 #---------------------------------------
-COPY apt/core-gui_5.2_amd64.deb /tmp/core-gui_5.2_amd64.deb
-COPY apt/python-core-ns3_5.2_all.deb /tmp/python-core-ns3_5.2_all.deb
-COPY apt/python-core_systemd_5.2_all.deb /tmp/python-core_systemd_5.2_all.deb
-COPY apt/python-core_sysv_5.2_all.deb /tmp/python-core_sysv_5.2_all.deb
+COPY apt/core_python3_5.5.2_amd64.deb /tmp/core_python3_5.5.2_amd64.deb
 
-RUN dpkg -i /tmp/core-gui*.deb /tmp/python-core*.deb
+RUN apt install /tmp/core_python3_5.5.2_amd64.deb
 
 # configure core
 #---------------------------------------
@@ -36,13 +33,13 @@ RUN apt-get update -y \
 
 # install emanes
 #---------------------------------------
-#RUN wget -O /opt/emane.tgz https://adjacentlink.com/downloads/emane/emane-1.0.1-release-1.ubuntu-16_04.amd64.tar.gz \
+#RUN wget -O /opt/emane.tgz https://adjacentlink.com/downloads/emane/emane-1.2.3-release-2.ubuntu-18_04.amd64.tar.gz \
 # && cd /opt \
 # && tar xzf /opt/emane.tgz \
-# && cd /opt/emane-1.0.1-release-1/debs/ubuntu-16_04/amd64 \
+# && cd /opt/emane-1.2.3-release-2/debs/ubuntu-18_04/amd64 \
 # && dpkg -i emane*.deb python*.deb \
 # && cd /root \
-# && rm -rf /opt/emane.tgz /opt/emane-1.0.1-release-1
+# && rm -rf /opt/emane.tgz /opt/emane-1.2.3-release-2
 
 # install and configure ssh
 #---------------------------------------
@@ -72,6 +69,7 @@ COPY supervisord.conf /etc/supervisor/conf.d/core.conf
 # startup configuration
 #---------------------------------------
 EXPOSE 22
+EXPOSE 50051
 
 WORKDIR /root
 CMD ["/usr/bin/supervisord", "--nodaemon"]

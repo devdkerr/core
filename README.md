@@ -7,6 +7,7 @@ docker run \
     --detach \
     --name <name> \
     --publish 22 \
+    --publish 50051 \
     --privileged \
     --volume /lib/modules:/lib/modules \
     devdkerr/core
