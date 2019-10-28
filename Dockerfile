@@ -16,7 +16,7 @@ RUN apt-get update -y \
 
 # install core
 #---------------------------------------
-RUN pip3 install grpcio-tools
+RUN pip3 install fabric grpcio-tools lxml
 
 RUN git clone -b develop https://github.com/coreemu/core.git /opt/core \
  && cd /opt/core \
@@ -26,6 +26,8 @@ RUN git clone -b develop https://github.com/coreemu/core.git /opt/core \
  && make install \
  && cd \
  && rm -rf /opt/core
+
+ENV PYTHONPATH "${PYTHONPATH}:/usr/local/lib/python3.6/site-packages"
 
 # configure core
 #---------------------------------------
