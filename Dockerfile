@@ -16,9 +16,16 @@ RUN apt-get update -y \
 
 # install core
 #---------------------------------------
-COPY apt/core_python3_5.5.2_amd64.deb /tmp/core_python3_5.5.2_amd64.deb
+RUN pip3 install grpcio-tools
 
-RUN apt install /tmp/core_python3_5.5.2_amd64.deb
+RUN git clone -b develop https://github.com/coreemu/core.git /opt/core \
+ && cd /opt/core \
+ && ./bootstrap.sh \
+ && PYTHON=/usr/bin/python3 ./configure \
+ && make \
+ && make install \
+ && cd \
+ && rm -rf /opt/core
 
 # configure core
 #---------------------------------------
