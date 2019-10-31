@@ -36,7 +36,7 @@ COPY icons /usr/share/core/icons/cisco
 RUN apt-get update -y \
  && apt-get install -qq -y bash curl screen wget xvfb \
  && apt-get install -qq -y apache2 iptables isc-dhcp-server mgen vsftpd \
- && apt-get install -qq -y iputils-ping net-tools scamper tcpdump traceroute tshark \
+ && apt-get install -qq -y iputils-ping moreutils net-tools scamper tcpdump traceroute tshark \
  && apt-get clean \
  && rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
 
