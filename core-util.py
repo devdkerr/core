@@ -42,13 +42,14 @@ def get_core_env(label):
             ),
         ])['ctr_name']]
 
-def run_command(label, private_key, host, command):
+def run_command(label, private_key, host, port, command):
     key_path = os.path.expanduser(private_key)
     assert os.path.exists(key_path)
     assert os.path.isfile(key_path)
 
     ctr = get_core_env(label)
-    ssh_port = ctr.attrs['NetworkSettings']['Ports']['22/tcp'][0]['HostPort']
+    if port is None:
+        port = ctr.attrs['NetworkSettings']['Ports']['22/tcp'][0]['HostPort']
 
     cmd = 'ssh'
     cmd += ' -i {0}'.format(key_path)
@@ -56,7 +57,7 @@ def run_command(label, private_key, host, command):
     cmd += ' -o StrictHostKeyChecking=no'
     cmd += ' -o UserKnownHostsFile=/dev/null'
     cmd += ' -o XAuthLocation=/opt/X11/bin/xauth'
-    cmd += ' -p {0}'.format(ssh_port)
+    cmd += ' -p {0}'.format(port)
     cmd += ' -X'
     cmd += ' root@{0}'.format(host)
     cmd += ' {0}'.format(command)
@@ -137,16 +138,19 @@ def cli_ps_func(args):
     return True
 
 def cli_ssh_func(args):
-    run_command(args.label, args.private_key, args.host,
+    run_command(args.label, args.private_key,
+                args.host, args.port,
                 args.shell)
 
 def cli_gui_func(args):
-    run_command(args.label, args.private_key, args.host,
+    run_command(args.label, args.private_key,
+                args.host, args.port,
                 'core-gui')
 #-------------------------------------------------------------------------------
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--host', '-H', default='127.0.0.1')
+    parser.add_argument('-H', '--host', default='127.0.0.1')
+    parser.add_argument('-P', '--port', type=int)
     parser.add_argument('--label', default='devdkerr')
     subparser = parser.add_subparsers()
 
