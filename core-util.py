@@ -94,6 +94,7 @@ def cli_up_func(args):
 
     ctr = client.containers.run(
         image='{0}:{1}'.format(args.image, args.tag),
+        cap_add=['ALL'],
         detach=True,
         labels=[
             args.label,

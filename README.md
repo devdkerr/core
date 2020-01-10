@@ -6,6 +6,7 @@ To start the container with a specific key and custom network, run the following
 docker run \
     --detach \
     --name <name> \
+    --cap-add=ALL \
     --publish 22 \
     --publish 50051 \
     --privileged \
