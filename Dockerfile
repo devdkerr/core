@@ -7,12 +7,30 @@ ENV TERM xterm
 # install core dependencies
 #---------------------------------------
 RUN apt-get update -y \
- && apt-get install -qq -y libev-dev libtk-img \
+ && apt-get install -qq -y libev-dev libreadline-dev libtk-img libtool \
  && apt-get install -qq -y python3 python3-dev python3-pip python3-setuptools \
- && apt-get install -qq -y automake gcc git pkg-config tk \
+ && apt-get install -qq -y autoconf automake gawk gcc git pkg-config tk \
  && apt-get install -qq -y bridge-utils ebtables ethtool iproute2 \
  && apt-get clean \
  && rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
+
+# install ospf mdf
+#---------------------------------------
+RUN git clone https://github.com/USNavalResearchLaboratory/ospf-mdr.git /opt/ospf-mdr \
+ && cd /opt/ospf-mdr \
+ && ./bootstrap.sh \
+ && ./configure \
+    --disable-doc \
+    --enable-group=root \
+    --enable-user=root \
+    --enable-vtysh \
+    --localstatedir=/var/run/quagga \
+    --sysconfdir=/usr/local/etc/quagga \
+    --with-cflags=-ggdb \
+ && make \
+ && make install \
+ && cd \
+ && rm -rf /opt/ospf-mdr
 
 # install core
 #---------------------------------------
@@ -42,13 +60,14 @@ RUN apt-get update -y \
 
 # install emanes
 #---------------------------------------
-#RUN wget -O /opt/emane.tgz https://adjacentlink.com/downloads/emane/emane-1.2.3-release-2.ubuntu-18_04.amd64.tar.gz \
-# && cd /opt \
-# && tar xzf /opt/emane.tgz \
-# && cd /opt/emane-1.2.3-release-2/debs/ubuntu-18_04/amd64 \
-# && dpkg -i emane*.deb python*.deb \
-# && cd /root \
-# && rm -rf /opt/emane.tgz /opt/emane-1.2.3-release-2
+RUN wget -O /opt/emane.tgz https://adjacentlink.com/downloads/emane/emane-1.2.5-release-1.ubuntu-18_04.amd64.tar.gz \
+ && cd /opt \
+ && tar xzf /opt/emane.tgz \
+ && cd /opt/emane-1.2.5-release-1/debs/ubuntu-18_04/amd64 \
+ && dpkg -i *.deb \
+ && apt-get install -f \
+ && cd /root \
+ && rm -rf /opt/emane.tgz /opt/emane-1.2.5-release-1
 
 # install and configure ssh
 #---------------------------------------
