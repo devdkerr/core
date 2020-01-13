@@ -60,14 +60,14 @@ RUN apt-get update -y \
 
 # install emanes
 #---------------------------------------
-RUN wget -O /opt/emane.tgz https://adjacentlink.com/downloads/emane/emane-1.2.5-release-1.ubuntu-18_04.amd64.tar.gz \
- && cd /opt \
- && tar xzf /opt/emane.tgz \
- && cd /opt/emane-1.2.5-release-1/debs/ubuntu-18_04/amd64 \
- && dpkg -i *.deb \
- && apt-get install -f \
- && cd /root \
- && rm -rf /opt/emane.tgz /opt/emane-1.2.5-release-1
+#RUN wget -O /opt/emane.tgz https://adjacentlink.com/downloads/emane/emane-1.2.5-release-1.ubuntu-18_04.amd64.tar.gz \
+# && cd /opt \
+# && tar xzf /opt/emane.tgz \
+# && cd /opt/emane-1.2.5-release-1/debs/ubuntu-18_04/amd64 \
+# && dpkg -i *.deb \
+# && apt-get install -f \
+# && cd /root \
+# && rm -rf /opt/emane.tgz /opt/emane-1.2.5-release-1
 
 # install and configure ssh
 #---------------------------------------
