@@ -34,7 +34,7 @@ RUN git clone https://github.com/USNavalResearchLaboratory/ospf-mdr.git /opt/osp
 
 # install core
 #---------------------------------------
-RUN pip3 install fabric grpcio-tools lxml
+RUN pip3 install fabric grpcio-tools lxml netaddr
 
 RUN git clone -b develop https://github.com/coreemu/core.git /opt/core \
  && cd /opt/core \
