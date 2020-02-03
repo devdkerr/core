@@ -7,10 +7,10 @@ ENV TERM xterm
 # install core dependencies
 #---------------------------------------
 RUN apt-get update -y \
- && apt-get install -qq -y libev-dev libreadline-dev libtk-img libtool \
+ && apt-get install -qq -y libev-dev libpcap-dev libreadline-dev libtk-img libtool \
  && apt-get install -qq -y python3 python3-dev python3-pip python3-setuptools \
  && apt-get install -qq -y autoconf automake gawk gcc git pkg-config tk \
- && apt-get install -qq -y bridge-utils ebtables ethtool iproute2 \
+ && apt-get install -qq -y bridge-utils ebtables ethtool iproute2 radvd \
  && apt-get clean \
  && rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
 
