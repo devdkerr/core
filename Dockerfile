@@ -34,7 +34,7 @@ RUN git clone https://github.com/USNavalResearchLaboratory/ospf-mdr.git /opt/osp
 
 # install core
 #---------------------------------------
-RUN pip3 install dataclasses fabric grpcio-tools lxml mako netaddr pyproj
+RUN pip3 install dataclasses fabric grpcio-tools lxml mako netaddr netifaces psutil pyproj
 
 RUN git clone -b develop https://github.com/coreemu/core.git /opt/core \
  && cd /opt/core \
@@ -52,8 +52,8 @@ ENV PYTHONPATH "${PYTHONPATH}:/usr/local/lib/python3.6/site-packages"
 COPY icons /usr/share/core/icons/cisco
 
 RUN apt-get update -y \
- && apt-get install -qq -y bash curl screen wget xvfb \
- && apt-get install -qq -y apache2 iptables isc-dhcp-server mgen vsftpd \
+ && apt-get install -qq -y bash curl psmisc screen wget xvfb \
+ && apt-get install -qq -y apache2 iptables isc-dhcp-client isc-dhcp-server mgen vsftpd \
  && apt-get install -qq -y iputils-ping moreutils net-tools scamper tcpdump traceroute tshark \
  && apt-get clean \
  && rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
