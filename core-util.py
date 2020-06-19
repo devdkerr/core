@@ -147,6 +147,11 @@ def cli_gui_func(args):
     run_command(args.label, args.private_key,
                 args.host, args.port,
                 'core-gui')
+
+def cli_pygui_func(args):
+    run_command(args.label, args.private_key,
+                args.host, args.port,
+                'core-pygui')
 #-------------------------------------------------------------------------------
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
@@ -185,6 +190,10 @@ if __name__ == '__main__':
     gui_parser = subparser.add_parser('gui')
     gui_parser.add_argument('--private-key', default='~/.ssh/id_rsa')
     gui_parser.set_defaults(func=cli_gui_func)
+
+    pygui_parser = subparser.add_parser('pygui')
+    pygui_parser.add_argument('--private-key', default='~/.ssh/id_rsa')
+    pygui_parser.set_defaults(func=cli_pygui_func)
 
     args = parser.parse_args()
     #---------------------------------------

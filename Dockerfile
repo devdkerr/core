@@ -8,7 +8,7 @@ ENV TERM xterm
 #---------------------------------------
 RUN apt-get update -y \
  && apt-get install -qq -y libev-dev libpcap-dev libreadline-dev libtk-img libtool \
- && apt-get install -qq -y python3 python3-dev python3-pip python3-setuptools \
+ && apt-get install -qq -y python3 python3-dev python3-pip python3-setuptools python3-tk \
  && apt-get install -qq -y autoconf automake gawk gcc git pkg-config tk \
  && apt-get install -qq -y bridge-utils ebtables ethtool iproute2 radvd \
  && apt-get clean \
@@ -34,7 +34,7 @@ RUN git clone https://github.com/USNavalResearchLaboratory/ospf-mdr.git /opt/osp
 
 # install core
 #---------------------------------------
-RUN pip3 install dataclasses fabric grpcio-tools lxml mako netaddr netifaces psutil pyproj
+RUN pip3 install dataclasses fabric grpcio-tools lxml mako netaddr netifaces Pillow psutil pyproj pyyaml
 
 RUN git clone -b develop https://github.com/coreemu/core.git /opt/core \
  && cd /opt/core \
