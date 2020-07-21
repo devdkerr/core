@@ -36,7 +36,7 @@ RUN git clone https://github.com/USNavalResearchLaboratory/ospf-mdr.git /opt/osp
 #---------------------------------------
 RUN pip3 install dataclasses fabric grpcio-tools lxml mako netaddr netifaces Pillow psutil pyproj pyyaml
 
-RUN git clone -b develop https://github.com/coreemu/core.git /opt/core \
+RUN git clone -b release-6.5.0 https://github.com/coreemu/core.git /opt/core \
  && cd /opt/core \
  && ./bootstrap.sh \
  && PYTHON=/usr/bin/python3 ./configure \
