@@ -9,7 +9,7 @@ ENV TERM xterm
 RUN apt-get update -y \
  && apt-get install -qq -y libev-dev libpcap-dev libreadline-dev libtk-img libtool \
  && apt-get install -qq -y python3 python3-dev python3-pip python3-setuptools python3-tk \
- && apt-get install -qq -y autoconf automake gawk gcc git pkg-config tk \
+ && apt-get install -qq -y autoconf automake gawk g++ gcc git pkg-config tk \
  && apt-get install -qq -y bridge-utils ebtables ethtool iproute2 radvd \
  && apt-get clean \
  && rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
@@ -34,14 +34,29 @@ RUN git clone https://github.com/USNavalResearchLaboratory/ospf-mdr.git /opt/osp
 
 # install core
 #---------------------------------------
-RUN pip3 install dataclasses fabric grpcio-tools lxml mako netaddr netifaces Pillow psutil pyproj pyyaml
+RUN pip3 install dataclasses fabric grpcio==1.27.2 grpcio-tools==1.27.2 lxml mako netaddr netifaces Pillow poetry psutil pyproj pyyaml
 
-RUN git clone -b release-6.5.0 https://github.com/coreemu/core.git /opt/core \
+RUN git clone -b release-7.2.1 https://github.com/coreemu/core.git /opt/core \
  && cd /opt/core \
  && ./bootstrap.sh \
- && PYTHON=/usr/bin/python3 ./configure \
- && make \
+ && ./configure --prefix=/usr/local \
+ && make -j$(nproc) \
  && make install \
+ && mkdir -p /etc/core \
+ && cp -n /opt/core/daemon/data/core.conf /etc/core \
+ && cp -n /opt/core/daemon/data/logging.conf /etc/core \
+ && cp /opt/core/daemon/scripts/core-cleanup /usr/local/bin/core-cleanup \
+ && cp /opt/core/daemon/scripts/core-cli /usr/local/bin/core-cli \
+ && cp /opt/core/daemon/scripts/core-daemon /usr/local/bin/core-daemon \
+ && cp /opt/core/daemon/scripts/core-imn-to-xml /usr/local/bin/core-imn-to-xml \
+ && cp /opt/core/daemon/scripts/core-manage /usr/local/bin/core-manage \
+ && cp /opt/core/daemon/scripts/core-pygui /usr/local/bin/core-pygui \
+ && cp /opt/core/daemon/scripts/core-route-monitor /usr/local/bin/core-route-monitor \
+ && cp /opt/core/daemon/scripts/core-service-update /usr/local/bin/core-service-update \
+ && cp /opt/core/daemon/scripts/coresendmsg /usr/local/bin/coresendmsg \
+ && cd /opt/core/daemon \
+ && poetry build -f wheel \
+ && pip3 install /opt/core/daemon/dist/* \
  && cd \
  && rm -rf /opt/core
 
