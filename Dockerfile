@@ -34,7 +34,10 @@ RUN git clone https://github.com/USNavalResearchLaboratory/ospf-mdr.git /opt/osp
 
 # install core
 #---------------------------------------
-RUN pip3 install dataclasses fabric grpcio==1.27.2 grpcio-tools==1.27.2 lxml mako netaddr netifaces Pillow poetry psutil pyproj pyyaml
+RUN pip3 install --upgrade pip \
+ && pip3 install cython \
+ && pip3 install dataclasses fabric grpcio==1.27.2 grpcio-tools==1.27.2 lxml mako netaddr netifaces Pillow poetry psutil pyyaml \
+ && pip3 install pyproj
 
 RUN git clone -b release-7.2.1 https://github.com/coreemu/core.git /opt/core \
  && cd /opt/core \
