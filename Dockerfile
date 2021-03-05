@@ -39,7 +39,7 @@ RUN pip3 install --upgrade pip \
  && pip3 install dataclasses fabric grpcio==1.27.2 grpcio-tools==1.27.2 lxml mako netaddr netifaces Pillow poetry psutil pyyaml \
  && pip3 install pyproj
 
-RUN git clone -b release-7.2.1 https://github.com/coreemu/core.git /opt/core \
+RUN git clone -b release-7.4.0 https://github.com/coreemu/core.git /opt/core \
  && cd /opt/core \
  && ./bootstrap.sh \
  && ./configure --prefix=/usr/local \
